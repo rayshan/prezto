@@ -10,6 +10,166 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+#
+# Aliases
+#
 
+# non-OSX
+if [[ "$OSTYPE" != darwin* ]]
+  then
+    alias ll='ls -lh --color=always | less'   # List, human readable sizes, excl. .*, paginated
+    alias la='ls -lhA --color=always | less'  # List, human readable sizes, incl. .*, paginated
+  else # --color doesn't work on OSX
+    export CLICOLOR=1
+    alias ll='ls -lhG'
+    alias la='ls -lhAG'
+fi
+
+# Ray's custom overrides
+# -F append indicator (one of */=>@|) to entries
+if [[ "$OSTYPE" != darwin* ]]
+  then
+    alias ll='ls -lhF --color=always | less'
+    alias la='ls -lhAF --color=always | less'
+  else # --color doesn't work on OSX
+    export CLICOLOR=1
+    alias ll='ls -lhGF'
+    alias la='ls -lhAGF'
+fi
+
+# global
+alias -g L="| less"
+
+# all OS
 alias c="clear"
+alias user="column -ts: /etc/passwd | sort"
+alias group="column -ts: /etc/group | sort"
+
+# Python
+alias p="python3"
+alias p2="python"
+
+# Node.js - npm
+
+# npmlist is nicer than --depth=0
+# alias npmls='npm ls --depth=0'
+# alias npmlsg='npm ls --depth=0 -g'
+
+alias npms='npm start'
+
+alias npmls='npmlist local'
+alias npmlsg='npmlist'
+
+alias npml='npm link'
+alias npmul='npm unlink'
+alias npmulg='npm unlink -g'
+
+alias npmo='npm outdated --depth=0'
+alias npmog='npm outdated --depth=0 -g'
+
+alias npmu='npm update'
+alias npmug='npm update -g'
+
+alias npmi='npm install'
+alias npmig='npm install -g'
+alias npmis='npm install --save'
+alias npmisd='npm install --save-dev'
+
+alias npmui='npm uninstall'
+alias npmuig='npm uninstall -g'
+alias npmuis='npm uninstall --save'
+alias npmuisd='npm uninstall --save-dev'
+
+# Node.js - yarn
+
+alias ys='yarn start'
+alias yr='yarn run'
+alias yi='yarn install'
+alias ya='yarn add'
+alias yad='yarn add --dev'
+alias yx='yarn remove'
+alias yls='yarn list --depth=0'
+alias yo='yarn outdated'
+alias yu='yarn upgrade'
+
+# Node.js - bower
+alias bi='bower install'
+alias bis='bower install --save'
+alias bisd='bower install --save-dev'
+alias bui='bower uninstall'
+alias buis='bower uninstall --save'
+alias buisd='bower uninstall --save-dev'
+
+# Other
+alias st='subl'
+alias hosts='sudo editor /etc/hosts'
+alias h='history -10'
+alias serve='http-server --address 127.0.0.1 -p 4000 --silent --cors --gzip -c-1' # node
+# alias jserve='bundle exec jekyll serve --drafts --full-rebuild'
+# alias jserve='bundle exec jekyll serve --drafts'
+alias lt='lt --subdomain rayshan --port ' # localtunnel
+
+#
+# Directories
+#
+
+hash -d git=/home/git/repos
+hash -d www=/var/www
+hash -d nginx=/etc/nginx
+hash -d upstart=/etc/init
+hash -d init=/etc/init
+hash -d initd=/etc/init.d
+
+hash -d log=/var/log
+hash -d log_bower=/var/www/stats.bower.io/logs
+hash -d log_upstart=/var/log/upstart
+
+hash -d hooks_bower=/home/git/repos/stats.bower.io.git/hooks
+
+hash -d zsh=~/.zprezto
+hash -d prezto=~/.zprezto
+
+#
+# Functions
+#
+
+function mkdircd {
+  command mkdir $1 && cd $1
+}
+
+# npm publish with goodies
+# `np` with an optional argument `patch`/`minor`/`major`/`<version>`, defaults to `patch`
+# prerequisite: `npm install -g trash`
+function npmp() {
+  trash node_modules &>/dev/null;
+  git pull --rebase && \
+  npm install && \
+  npm test && \
+  npm version ${1:-patch} && \
+  npm publish && \
+  git push --follow-tags
+}
+
+#
+# Key bindings
+# (code could change depending on terminal emulator used)
+#
+
+bindkey '^[[1;9C' forward-word			# alt + left
+bindkey '^[[1;9D' backward-word			# alt + right
+
+#
+# Options
+#
+
+setopt interactivecomments	# allows # comments inline for cmd history search
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh

@@ -33,7 +33,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   # Branch (b)
   alias gb='git branch'
   alias gba='git branch --all --verbose'
-  alias gbc='git checkout -b' # new branch then checkout
+  alias gbc='git checkout -b'
   alias gbd='git branch --delete'
   alias gbD='git branch --delete --force'
   alias gbl='git branch --verbose'
@@ -68,6 +68,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gcr='git revert'
   alias gcR='git reset "HEAD^"'
   alias gcs='git show'
+  alias gcsS='git show --pretty=short --show-signature'
   alias gcl='git-commit-lost'
   alias gcy='git cherry -v --abbrev'
   alias gcY='git cherry -v'
@@ -96,7 +97,9 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gfc='git clone'
   alias gfcr='git clone --recurse-submodules'
   alias gfm='git pull'
+  alias gfma='git pull --autostash'
   alias gfr='git pull --rebase'
+  alias gfra='git pull --rebase --autostash'
 
   # Flow (F)
   alias gFi='git flow init'
@@ -183,18 +186,17 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias giX='git rm -rf --cached'
 
   # Log (l)
-  # alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'
-  alias gl='git log --oneline --graph --decorate -20'
-  alias gla='git log --oneline --graph --decorate --all -20' # all branches, noisy
+  alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'
   alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
   alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
   alias glo='git log --topo-order --pretty=format:"${_git_log_oneline_format}"'
-  alias glg='git log --topo-order --all --graph --pretty=format:"${_git_log_oneline_format}"'
+  alias glg='git log --topo-order --graph --pretty=format:"${_git_log_oneline_format}"'
   alias glb='git log --topo-order --pretty=format:"${_git_log_brief_format}"'
   alias glc='git shortlog --summary --numbered'
+  alias glS='git log --show-signature'
 
   # Merge (m)
-  # alias gm='git merge' # conflict with GraphicsMagick
+  alias gm='git merge'
   alias gmC='git merge --no-commit'
   alias gmF='git merge --no-ff'
   alias gma='git merge --abort'
@@ -210,23 +212,23 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gpc='git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'
   alias gpp='git pull origin "$(git-branch-current 2> /dev/null)" && git push origin "$(git-branch-current 2> /dev/null)"'
 
-  # Rebase (r) (swapped from r)
-  alias gR='git rebase'
-  alias gRa='git rebase --abort'
-  alias gRc='git rebase --continue'
-  alias gRi='git rebase --interactive'
-  alias gRs='git rebase --skip'
+  # Rebase (r)
+  alias gr='git rebase'
+  alias gra='git rebase --abort'
+  alias grc='git rebase --continue'
+  alias gri='git rebase --interactive'
+  alias grs='git rebase --skip'
 
-  # Remote (R) (swapped from R)
-  alias gr='git remote'
-  alias grl='git remote --verbose'
-  alias gra='git remote add'
-  alias grx='git remote rm'
-  alias grm='git remote rename'
-  alias gru='git remote update'
-  alias grp='git remote prune'
-  alias grs='git remote show'
-  alias grb='git-hub-browse'
+  # Remote (R)
+  alias gR='git remote'
+  alias gRl='git remote --verbose'
+  alias gRa='git remote add'
+  alias gRx='git remote rm'
+  alias gRm='git remote rename'
+  alias gRu='git remote update'
+  alias gRp='git remote prune'
+  alias gRs='git remote show'
+  alias gRb='git-hub-browse'
 
   # Stash (s)
   alias gs='git stash'
@@ -257,6 +259,8 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   # Tag (t)
   alias gt='git tag'
   alias gtl='git tag -l'
+  alias gts='git tag -s'
+  alias gtv='git verify-tag'
 
   # Working Copy (w)
   alias gws='git status --ignore-submodules=${_git_status_ignore_submodules} --short'

@@ -51,9 +51,11 @@ alias p2="python"
 
 # Node.js - npm
 
+export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
+
 # npmlist is nicer than --depth=0
 # alias npmls='npm ls --depth=0'
-# alias npmlsg='npm ls --depth=0 -g'
+# alias npmlsg='npm ls --depth=0 --location=global'
 
 alias npms='npm start'
 
@@ -62,21 +64,21 @@ alias npmlsg='npmlist'
 
 alias npml='npm link'
 alias npmul='npm unlink'
-alias npmulg='npm unlink -g'
+alias npmulg='npm unlink --location=global'
 
 alias npmo='npm outdated --depth=0'
-alias npmog='npm outdated --depth=0 -g'
+alias npmog='npm outdated --depth=0 --location=global'
 
 alias npmu='npm update'
-alias npmug='npm update -g'
+alias npmug='npm update --location=global'
 
 alias npmi='npm install'
-alias npmig='npm install -g'
+alias npmig='npm install --location=global'
 alias npmis='npm install --save'
 alias npmisd='npm install --save-dev'
 
 alias npmui='npm uninstall'
-alias npmuig='npm uninstall -g'
+alias npmuig='npm uninstall --location=global'
 alias npmuis='npm uninstall --save'
 alias npmuisd='npm uninstall --save-dev'
 
@@ -93,12 +95,16 @@ alias yo='yarn outdated'
 alias yu='yarn upgrade'
 
 # Node.js - bower
-alias bi='bower install'
-alias bis='bower install --save'
-alias bisd='bower install --save-dev'
-alias bui='bower uninstall'
-alias buis='bower uninstall --save'
-alias buisd='bower uninstall --save-dev'
+# alias bi='bower install'
+# alias bis='bower install --save'
+# alias bisd='bower install --save-dev'
+# alias bui='bower uninstall'
+# alias buis='bower uninstall --save'
+# alias buisd='bower uninstall --save-dev'
+
+# Ruby
+
+export PATH="/opt/homebrew/opt/ruby@3.1/bin:$PATH"
 
 # Other
 alias st='subl'
@@ -139,7 +145,7 @@ function mkdircd {
 
 # npm publish with goodies
 # `np` with an optional argument `patch`/`minor`/`major`/`<version>`, defaults to `patch`
-# prerequisite: `npm install -g trash`
+# prerequisite: `npm install --location=global trash`
 function npmp() {
   trash node_modules &>/dev/null;
   git pull --rebase && \
@@ -163,13 +169,3 @@ bindkey '^[[1;9D' backward-word			# alt + right
 #
 
 setopt interactivecomments	# allows # comments inline for cmd history search
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh

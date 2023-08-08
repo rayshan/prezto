@@ -9,10 +9,3 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-
-# psql, pg_dump, etc.
-PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-
-# Expose tools installed via Android Studio
-# PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
-# PATH=$PATH:$HOME/Library/Android/sdk/tools

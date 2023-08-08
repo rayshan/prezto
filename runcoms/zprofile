@@ -41,18 +41,20 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
-# Use specific PHP version per
-# https://github.com/Homebrew/homebrew-core/issues/28102#issuecomment-390862470
-# Must be sourced before /usr/bin
-# TODO: why doesn't this work in .zshenv, which should be sourced before .zprofile?
-export PATH="/usr/local/opt/php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
-
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
   $path
 )
+
+# Add Homebrew for M1 Apple Silicon to path
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# psql, pg_dump, etc.
+PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+# node@x installed with homebrew needs to be manually added to PATH
+PATH=/opt/homebrew/opt/node@16/bin:$PATH
 
 #
 # Less

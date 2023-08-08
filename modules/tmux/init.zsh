@@ -23,7 +23,7 @@ if ([[ "$TERM_PROGRAM" = 'iTerm.app' ]] && \
   _tmux_iterm_integration='-CC'
 fi
 
-if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" && "$TERM_PROGRAM" != "vscode" ]] && ( \
+if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" && "$TERM_PROGRAM" != "vscode" && "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]] && ( \
   ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' remote ) ||
   ( [[ -z "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' local ) \
 ); then
@@ -45,8 +45,7 @@ fi
 # Aliases
 #
 
-alias tmuxn='tmux new-session -s' # [name] create new named session; if don't need name just use 'tmux'
-alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
-alias tmuxl='tmux list-sessions'
-alias tmuxr='tmux rename-session -t' # [name] [new name]
-alias tmuxk='tmux kill-session -t'
+if ! zstyle -t ':prezto:module:tmux:alias' skip; then
+  alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
+  alias tmuxl='tmux list-sessions'
+fi

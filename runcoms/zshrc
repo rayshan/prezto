@@ -14,28 +14,15 @@ fi
 # Aliases
 #
 
-# non-OSX
-if [[ "$OSTYPE" != darwin* ]]
-  then
-    alias ll='ls -lh --color=always | less'   # List, human readable sizes, excl. .*, paginated
-    alias la='ls -lhA --color=always | less'  # List, human readable sizes, incl. .*, paginated
-  else # --color doesn't work on OSX
-    export CLICOLOR=1
-    alias ll='ls -lhG'
-    alias la='ls -lhAG'
-fi
+alias ls=lsd
+alias ll='lsd -l'
+alias la='lsd -lA'
 
-# Ray's custom overrides
-# -F append indicator (one of */=>@|) to entries
-if [[ "$OSTYPE" != darwin* ]]
-  then
-    alias ll='ls -lhF --color=always | less'
-    alias la='ls -lhAF --color=always | less'
-  else # --color doesn't work on OSX
-    export CLICOLOR=1
-    alias ll='ls -lhGF'
-    alias la='ls -lhAGF'
-fi
+# lsd https://github.com/lsd-rs/lsd
+# -l long format with multiple columns
+# -A Show hidden files (entries whose names begin with a dot (‘.’)) except for . and ..
+# -h with -l, use unit suffixes: Byte, Kilobyte, Megabyte, etc.
+# -G colorized output, same as defining CLICOLOR/COLORTERM in the environment and setting --color=auto
 
 # global
 alias -g L="| less"

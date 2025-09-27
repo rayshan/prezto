@@ -10,6 +10,13 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+
+
+
+
+# Above is from upstream source ===============================================
+# Below is Ray's custom config ================================================
+
 #
 # Aliases
 #
@@ -35,10 +42,11 @@ alias group="column -ts: /etc/group | sort"
 # Python
 alias p="python3"
 alias p2="python"
+alias python="python3"
 
 # Node.js - npm
 
-export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
+# export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 
 # npmlist is nicer than --depth=0
 # alias npmls='npm ls --depth=0'
@@ -91,7 +99,8 @@ alias yu='yarn upgrade'
 
 # Ruby
 
-export PATH="/opt/homebrew/opt/ruby@3.1/bin:$PATH"
+# Installed via homebrew, not auto added to PATH
+export PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH"
 
 # Other
 alias st='subl'
@@ -104,8 +113,11 @@ alias lt='lt --subdomain rayshan --port ' # localtunnel
 
 #
 # Directories
+# "hash -d" creates named directory shortcuts in zsh, similar to ~ > home directory
+# Use in any command, e.g. "cd ~zsh", "ls ~zsh", "vim ~zsh/runcoms/zshrc"
 #
 
+# Unix
 hash -d git=/home/git/repos
 hash -d www=/var/www
 hash -d nginx=/etc/nginx
@@ -114,10 +126,6 @@ hash -d init=/etc/init
 hash -d initd=/etc/init.d
 
 hash -d log=/var/log
-hash -d log_bower=/var/www/stats.bower.io/logs
-hash -d log_upstart=/var/log/upstart
-
-hash -d hooks_bower=/home/git/repos/stats.bower.io.git/hooks
 
 hash -d zsh=~/.zprezto
 hash -d prezto=~/.zprezto
@@ -155,4 +163,6 @@ bindkey '^[[1;9D' backward-word			# alt + right
 # Options
 #
 
-setopt interactivecomments	# allows # comments inline for cmd history search
+# allows # comments inline, useful for cmd history search via "h"
+# E.g. ls -l # List files in long format
+setopt interactivecomments

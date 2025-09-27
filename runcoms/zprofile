@@ -55,15 +55,6 @@ path=(
   $path
 )
 
-# Add Homebrew for M1 Apple Silicon to path
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# psql, pg_dump, etc.
-PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-
-# node@x installed with homebrew needs to be manually added to PATH
-PATH=/opt/homebrew/opt/node@16/bin:$PATH
-
 #
 # Less
 #
@@ -80,3 +71,14 @@ fi
 if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+
+
+
+
+# Above is from upstream source ===============================================
+# Below is Ray's custom config ================================================
+
+# psql, pg_dump, etc.
+PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+

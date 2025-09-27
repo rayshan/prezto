@@ -37,21 +37,24 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'utility' \
-  'completion' \
-  'command-not-found' \
   'git' \
   'node' \
-  'ruby' \
   'osx' \
-  'homebrew' \
-  'autosuggestions' \
+  'completion' \
   'syntax-highlighting' \
   'history-substring-search' \
+  'autosuggestions' \
   'prompt'
 
-# Per https://github.com/sorin-ionescu/prezto/tree/master/modules/syntax-highlighting
-# 'syntax-highlighting' should be loaded second to last before prompt
-# unless used with the history-substring-search module where it must be loaded before it
+# Required module load orders
+
+# These modules must be loaded in below order if used together
+# syntax-highlighting > history-substring-search > autosuggestions > prompt
+# Source: https://github.com/sorin-ionescu/prezto/tree/master/modules/syntax-highlighting
+
+# Must be loaded before completion: git, node, osx
+# Source: see README of each of the modules
+
 
 #
 # Autosuggestions
@@ -158,7 +161,6 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'pure'
-# zstyle ':prezto:module:prompt' theme 'ray'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)

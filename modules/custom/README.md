@@ -1,1 +1,0 @@
-# Ray's custom module.
